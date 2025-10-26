@@ -1,22 +1,38 @@
+// Program or employee incentive
+
+use std::io;
 fn main() {
-    // addition
-    let sum = 5550 + 7310;
-    println!("The sum of 5550 and 7310 = {}",sum);
+println!("EMPLOYEE DATABASE");
+let mut input1 =String::new();
+let mut input2 =String::new();
 
-    //subtraction
-    let difference:f64 = 95.5 - 4.3;
-    println!("The difference of 95.5 and 4.3 = {}", difference);
+println!("\nEnter your experience level (experienced or unexperienced:)");    
+io::stdin().read_line (&mut input1).expect("Faild to read input");
+let experience=input1.trim().to_lower();
 
-    // multiplication 
-    let product:f32 = 4.0 * 30.0;
-    println!("The multiple of 4 and 30 = {}", product);
 
-    // division 
-    let quotient = 56.7 / 32.2;
-    println!("The division of 56.7 and 32.2 = {}", quotient);
+println!("\nEnter your age");    
+io::stdin().read_line (&mut input2).expect("Faild to read input");
+let age:u232=input2.trim().parse().expect("Invalid data type")
 
-    // remainder
-    let remainder = 43 % 5;
-    println!("The remainder of 43 and 5 = {}", remainder);
+let incentive :i32;
 
+if experience == "experience" {
+    if age >= 40 {
+        print!("\nThe annual incentive for this employee is #1,560,000");
+    } else if age >= 30 && age < 40 {
+        println!("\nThe annual incentive for this employee is #1,480,000");  
+    } else if age < 28 {
+        println!("\nThe annual incentive for this employeeis #1,300,000 ");} else {
+            println!("\nThe annual incentive for this employee is #1,000,000")
+        }
+} else if experience == 
+"unexperienced" || eperience ==
+"inexperience" {
+    println!("\nThe annual incentive for this employee is #100,000");
+} else {
+    println!("\nInvaldid experience input. Please enter 'experienced" or 'unexperienced'");
 }
+}
+
+
