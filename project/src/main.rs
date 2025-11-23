@@ -1,51 +1,64 @@
-// Rust program for finding root
-
-use std::io; 
+use std::io;
 
 fn main() {
-    println!("Quadratic Equation Solver: ax^2 + bx + c = 0");
+    // vector contains the staffs roles, min_years, max_years and level
+    let aps_table = vec![
+        ("Intern-Paralegal", 1, 2, "APS 1-2"),
+        ("Placement", 1, 2, "APS 1-2"),
 
-    // Input a
-    println!("Enter value for a:");
-    let mut input_a = String::new();
-    io::stdin().read_line(&mut input_a).expect("Failed");
-    let a: f64 = input_a.trim().parse().expect("Not a number");
+        ("Administrator", 3, 5, "APS 3-5"),
+        ("Research Assistant", 3, 5, "APS 3-5"),
+        ("Junior Associate", 3, 5, "APS 3-5"),
+        ("Classroom Teacher", 3, 5, "APS 3-5"),
 
-    // Input b
-    println!("Enter value for b:");
-    let mut input_b = String::new();
-    io::stdin().read_line(&mut input_b).expect("Failed");
-    let b: f64 = input_b.trim().parse().expect("Not a number");
+        ("Senior Administrator", 5, 8, "APS 5-8"),
+        ("PhD Candidate", 5, 8, "APS 5-8"),
+        ("Associate", 5, 8, "APS 5-8"),
+        ("Senior Teacher", 5, 8, "APS 5-8"),
 
-    // Input c
-    println!("Enter value for c:");
-    let mut input_c = String::new();
-    io::stdin().read_line(&mut input_c).expect("Failed");
-    let c: f64 = input_c.trim().parse().expect("Not a number");
+        ("Office Manager", 8, 10, "EL1 8-10"),
+        ("Post-Doc Researcher", 8, 10, "EL1 8-10"),
+        ("Senior Associate 1-2", 8, 10, "EL1 8-10"),
+        ("Leading Teacher", 8, 10, "EL1 8-10"),
 
-    // Calculate discriminant
-    let d = b * b - 4.0 * a * c;
+        ("Director", 10, 13, "EL2 10-13"),
+        ("Senior Lecturer", 10, 13, "EL2 10-13"),
+        ("Senior Associate 3-4", 10, 13, "EL2 10-13"),
+        ("Deputy Principal", 10, 13, "EL2 10-13"),
 
-    if d > 0.0 {
-        // Two real roots
-        let root1 = (-b + d.sqrt()) / (2.0 * a);
-        let root2 = (-b - d.sqrt()) / (2.0 * a);
-        println!("Two Real Roots:");
-        println!("x1 = {}", root1);
-        println!("x2 = {}", root2);
+        // 13 years and above = SES
+        ("CEO", 13, 50, "SES"),
+        ("Dean", 13, 50, "SES"),
+        ("Partner", 13, 50, "SES"),
+        ("Principal", 13, 50, "SES"),
+    ];
 
-    } else if d == 0.0 {
-        // One real root
-        let root = -b / (2.0 * a);
-        println!("One Real Root:");
-        println!("x = {}", root);
+    let mut role = String::new();
+    println!("Enter your role:");
+    io::stdin().read_line(&mut role).expect("Invalid Input");
+    let role = role.trim();
 
-    } else {
-        // Complex roots
-        let real_part = -b / (2.0 * a);
-        let imag_part = (-d).sqrt() / (2.0 * a);
-        println!("Complex Roots:");
-        println!("x1 = {} + {}i", real_part, imag_part);
-        println!("x2 = {} - {}i", real_part, imag_part);
+    let mut exp_input = String::new();
+    println!("Enter your years of work experience:");
+    io::stdin().read_line(&mut exp_input).expect("Invalid Input");
+    let years: f32 = exp_input.trim().parse().expect("Enter a number");
+
+    let mut found = false;
+
+    for (r, min, max, aps) in aps_table {
+        if r.eq_ignore_ascii_case(role) && years >= min as f32 && years <= max as f32 {
+            println!("Staff Role: {}", r);
+            println!("Experience: {} years", years);
+            println!("APS Level: {}", aps);
+            found = true;
+            break;
+        }
+    }
+
+    if !found {
+        println!(
+            "No APS level found for '{}' with {} years of experience.",
+            role, years
+        );
     }
 }
